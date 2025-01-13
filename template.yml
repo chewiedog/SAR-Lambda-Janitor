@@ -19,7 +19,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: functions/clean.handler
-      Runtime: nodejs22.x
+      Runtime: nodejs20.x
       Timeout: 900
       Environment:
         Variables:
