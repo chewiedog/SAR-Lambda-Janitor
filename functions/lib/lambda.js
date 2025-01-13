@@ -41,8 +41,12 @@ const listFunctions = async () => {
 			getRetryConfig((err) => {
 				log.warn("retrying listFunctions after error...", err);
 			}));
-		const functions = res.Functions.map(x => x.FunctionArn);
-		const newAcc = acc.concat(functions);
+		// Filter functions whose names start with "dev"
+        const filteredFunctions = res.Functions
+            .filter((x) => x.FunctionName.startsWith("datadog"))
+            .map((x) => x.FunctionArn);
+
+        const newAcc = acc.concat(filteredFunctions);
 
 		if (res.NextMarker) {
 			return loop(newAcc, res.NextMarker);
