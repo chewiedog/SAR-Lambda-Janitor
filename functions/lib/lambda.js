@@ -30,7 +30,7 @@ const listFunctions = async () => {
 	const loop = async (acc = [], marker) => {
 		const params = {
 			Marker: marker,
-			MaxItems: 10
+			MaxItems: 50
 		};
 
 		const res = await retry(
@@ -63,7 +63,7 @@ const listVersions = async (funcArn, delayVal = 10) => {
 		const params = {
 			FunctionName: funcArn,
 			Marker: marker,
-			MaxItems: 20
+			MaxItems: 50
 		};
 
 		// Introduce delay before making the API request
@@ -98,7 +98,7 @@ const listAliasedVersions = async (funcArn, delayVal = 10) => {
 		const params = {
 			FunctionName: funcArn,
 			Marker: marker,
-			MaxItems: 20
+			MaxItems: 50
 		};
         // Introduce delay before making the API request
 		await delay(delayVal); // Adjust the delay (in milliseconds) as needed
