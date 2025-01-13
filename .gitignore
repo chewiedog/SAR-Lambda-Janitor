@@ -27,3 +27,5 @@ coverage
 .DS_Store
 
 .env
+
+.aws-sam
