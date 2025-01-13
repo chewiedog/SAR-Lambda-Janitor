@@ -41,9 +41,9 @@ const listFunctions = async () => {
 			getRetryConfig((err) => {
 				log.warn("retrying listFunctions after error...", err);
 			}));
-		// Filter functions whose names start with "dev"
+		// Filter functions whose names start with "dev-"
         const filteredFunctions = res.Functions
-            .filter((x) => x.FunctionName.startsWith("datadog"))
+            .filter((x) => x.FunctionName.startsWith("dev-"))
             .map((x) => x.FunctionArn);
 
         const newAcc = acc.concat(filteredFunctions);
