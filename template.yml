@@ -43,7 +43,7 @@ Resources:
         CleanScheduledEvent:
           Type: Schedule
           Properties:
-            Schedule: rate(1 hour)
+            Schedule: rate(1 day)
 
   LogGroup:
     Type: AWS::Logs::LogGroup
