@@ -57,7 +57,7 @@ Parameters:
     Type: Number
     Description: >-
       How many versions to keep, even if they are not aliased.
-    Default: 3
+    Default: 5
     MinValue: 0 # don't keep anything except $Latest
   dryRunValue:
     Type: String
