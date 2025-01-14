@@ -3,6 +3,7 @@ const lambda = new AWS.Lambda();
 const _ = require("lodash");
 const log = require("@dazn/lambda-powertools-logger");
 const retry = require("async-retry");
+const filterBy = process.env.FILTER || "";
 // Delay function
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -43,7 +44,7 @@ const listFunctions = async () => {
 			}));
 		// Filter functions whose names start with "dev-"
         const filteredFunctions = res.Functions
-            .filter((x) => x.FunctionName.startsWith("dev-"))
+		    .filter(x => filterBy ? x.FunctionName.startsWith(filterBy) : true)
             .map((x) => x.FunctionArn);
 
         const newAcc = acc.concat(filteredFunctions);
@@ -141,10 +142,11 @@ const listAliasedVersions = async (funcArn, delayVal = 10) => {
 };
 
 const deleteVersion = async (funcArn, version, dryRun = true) => {
-	log.info(dryRun ? "dry run: would delete..." : "deleting...", { function: funcArn, version });
+	//log.info(dryRun ? "dry run: would delete..." : "deleting...", { function: funcArn, version });
 
 	if (dryRun) {
 		// If dryRun is true, just log and return without making the API call
+		log.info(`summary: Would Delete ${funcArn}:${version}`);
 		return;
 	}
 

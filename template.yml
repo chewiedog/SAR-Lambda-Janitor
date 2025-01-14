@@ -28,9 +28,11 @@ Resources:
           VERSIONS_TO_KEEP:
             Ref: VersionsToKeep
           dryRun:
-            Ref: dryRun
+            Ref: dryRunValue
           DELAY_VALUE:
             Ref: DelayValue
+          FILTER:
+            Ref: FilterValue
           AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
       Policies:
         - Statement:
@@ -57,10 +59,11 @@ Parameters:
       How many versions to keep, even if they are not aliased.
     Default: 3
     MinValue: 0 # don't keep anything except $Latest
-  dryRun:
+  dryRunValue:
     Type: String
     Description: >-
       'true' just show output, 'false' actually delete versions
+    Default: true
   DelayValue:
     Type: Number
     Description: >-
@@ -71,3 +74,8 @@ Parameters:
     Description: >-
       Set to DEBUG when dryRun is true to see explicit action information.
     Default: DEBUG
+  FilterValue:
+    Type: String
+    Description: >-
+      Set FILTER to limit the scope of functions to names starting with this value.
+    Default: dev
