@@ -146,15 +146,14 @@ const deleteVersion = async (funcArn, version, dryRun = true) => {
 
 	if (dryRun) {
 		// If dryRun is true, just log and return without making the API call
-		log.info(`summary: Would Delete ${funcArn}:${version}`);
+		log.info(`Would Delete: ${funcArn}:${version}`);
 		return;
 	}
-
 	const params = {
 		FunctionName: funcArn,
 		Qualifier: version
 	};
-
+    log.debug(`Delete: ${funcArn}:${version}`);
 	await retry(
 		(bail) => lambda
 			.deleteFunction(params)
